@@ -4,7 +4,7 @@
 <mapper namespace="phonebook">
 
 	<!-- 전체 리스트 쿼리문 -->
-	<select id="selectList" resultType="com.javaex.vo.PersonVo">
+	<select id="selectList" resultType="PersonVo">
 	<![CDATA[
 		SELECT
 			person_id,
@@ -19,7 +19,7 @@
 	</select>
 
 	<!-- 전화번호 등록 쿼리문 -->
-	<insert id="insert" parameterType="com.javaex.vo.PersonVo">
+	<insert id="insert" parameterType="PersonVo">
 	<![CDATA[
 		INSERT INTO person VALUES (
 			SEQ_PERSON_ID.NEXTVAL,
@@ -30,6 +30,68 @@
 	]]>
 	</insert>
 
+	<!-- 전화번호 등록 버전 2 쿼리문 -->
+	<insert id="insert2" parameterType="map">
+	<![CDATA[
+		INSERT INTO person VALUES (
+			SEQ_PERSON_ID.NEXTVAL,
+			#{name},
+			#{hp},
+			#{company}
+		)
+	]]>
+	</insert>
 
+	<!-- 전화번호 삭제 쿼리문 (vo로 묶지 않았을 경우 기본 자료형이 온다.) -->
+	<delete id="delete" parameterType="int">
+	<![CDATA[
+		DELETE FROM person
+		WHERE
+			person_id = #{person_id}
+	]]>
+	</delete>
+
+	<!-- 전화번호 1명 출력 쿼리문(person_id를 받아 해당 id에 맞는 데이터를 resultType=Vo로 가져온다) -->
+	<select id="selectOne" parameterType="int" resultType="PersonVo">
+	<![CDATA[
+		SELECT
+    		person_id,
+		    name,
+		    hp,
+		    company
+		FROM
+    		person
+		WHERE
+    		person_id = #{person_id}
+	]]>
+	</select>
+
+	<!-- 전화번호 1명 출력 쿼리문 버전 2 -->
+	<select id="selectOne2" parameterType="int" resultType="map">
+	<![CDATA[
+		SELECT
+    		person_id,
+		    name,
+		    hp,
+		    company
+		FROM
+    		person
+		WHERE
+    		person_id = #{person_id}
+	]]>
+	</select>
+
+	<!-- 전화번호 수정 쿼리문 -->
+	<update id="update" parameterType="PersonVo">
+	<![CDATA[
+		UPDATE person
+		SET
+			name = #{name}
+			hp = #{hp}
+			company = #{company}
+		WHERE
+			person_id = #{person_id}
+	]]>
+	</update>
 
 </mapper>
