@@ -14,18 +14,18 @@
 
   <form action="${pageContext.request.contextPath}/modify" method="post">
     <label>이름:</label>
-    <input type="text" name="name" value="${personVo.name}">
+    <input type="text" name="name" value="${pMap.NAME}">
     <br>
 
     <label>전화번호:</label>
-    <input type="text" name="hp" value="${personVo.hp}">
+    <input type="text" name="hp" value="${pMap.HP}">
     <br>
 
     <label>회사:</label>
-    <input type="text" name="company" value="${personVo.company}">
+    <input type="text" name="company" value="${pMap.COMPANY}">
     <br>
 
-    <input type="hidden" name="person_id" value="${personVo.person_id}">
+    <input type="hidden" name="person_id" value="${pMap.PERSON_ID}">
 
     <button type="submit">수정</button>
 
