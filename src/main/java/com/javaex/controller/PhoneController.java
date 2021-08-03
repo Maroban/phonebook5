@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.dao.PhoneDao;
+import com.javaex.service.PhoneService;
 import com.javaex.vo.PersonVo;
 
 @Controller
 public class PhoneController {
 
 	// 필드
+	@Autowired
+	private PhoneService phoneService;
+
 	@Autowired
 	private PhoneDao phoneDao;
 
@@ -95,7 +99,7 @@ public class PhoneController {
 	public String modifyForm(@PathVariable("person_id") int person_id, Model model) {
 
 		// 한사람 정보 가져오기
-		PersonVo personVo = phoneDao.getPerson(person_id);
+		PersonVo personVo = phoneService.getPerson(person_id);
 
 		// model에 담기
 		model.addAttribute("personVo", personVo);
